@@ -79,14 +79,11 @@ public class ParallelMethod {
 
                         if(closestIntersection.getObject().getLayers().isReflection()){
                             objColors=Raytracer.reflection(ray,closestIntersection,objects, new double[]{cameraZ + nearFarPlanes[0], cameraZ + nearFarPlanes[1]},reflectColor1,light);
-                            for(int index=0;index<3;index++)
-                            {
-                                objColors[index]*=fallOffLight*lightColors[index];
-                            }
+//
                         }
                         if(closestIntersection.getObject().getLayers().isRefraction())
                         {
-                            objColors=Raytracer.refraction(ray,closestIntersection,objects, new double[]{cameraZ + nearFarPlanes[0], cameraZ + nearFarPlanes[1]},true,true,reflectColor1,light);
+                            objColors=Raytracer.refraction(ray,closestIntersection,objects, new double[]{cameraZ + nearFarPlanes[0], cameraZ + nearFarPlanes[1]},true,reflectColor1,light);
 
                         }
                         for (int colorIndex = 0; colorIndex < objColors.length; colorIndex++) {
@@ -94,33 +91,24 @@ public class ParallelMethod {
                             if(!closestIntersection.getObject().getLayers().isReflection() && !closestIntersection.getObject().getLayers().isRefraction() )
                             {
                                 if(shadowIntersection!=null) {
-                                    objColors[colorIndex] *= fallOffLight * lightColors[colorIndex]*(1-closestIntersection.getObject().getLayers().getShininess());
+                                    objColors[colorIndex] *=.35;
                                 }
-                                else {
+                                else
+                                {
                                     objColors[colorIndex] *= fallOffLight * lightColors[colorIndex];
                                 }
-                            }
-                            else {
-                                if (closestIntersection.getObject().getLayers().isReflection())
 
-                                {
-                                    if(shadowIntersection!=null)
-                                    {
-                                        objColors[colorIndex] *=(1-closestIntersection.getObject().getLayers().getShininess());;
-                                    }
+                            }
+                            if(closestIntersection.getObject().getLayers().isReflection())
+                            {
+                                if(shadowIntersection!=null) {
+                                    objColors[colorIndex] *=.35;
                                 }
                             }
 
                         }
                         Color diffuse =new Color(Raytracer.clamp(objColors[0], 0, 1),Raytracer.clamp(objColors[1], 0, 1),Raytracer.clamp(objColors[2], 0, 1));
-//
-                        if(shadowIntersection!=null)
-                        {
-                            if(!closestIntersection.getObject().getLayers().isReflection() && !closestIntersection.getObject().getLayers().isReflection())
-                            {
-                                diffuse=Color.BLACK;
-                            }
-                        }
+
                         pixelColor =Raytracer.addColor(pixelColor, diffuse);
                     }
                 }
