@@ -1,0 +1,10 @@
+newmtl _crocus_flower1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 12974_crocus_flower_diff.jpg
+map_Ka 12974_crocus_flower_diff.jpg
+Ni 1.50
+Ks 0.14 0.14 0.14
+Ns 35.00

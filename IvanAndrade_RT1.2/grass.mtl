@@ -1,0 +1,10 @@
+newmtl _Rectangular_Grass_Patch_v2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 10450_Rectangular_Grass_Patch_v1_Diffuse.jpg
+map_Ka 10450_Rectangular_Grass_Patch_v1_Diffuse.jpg
+Ni 1.50
+Ks 0.09 0.09 0.09
+Ns 10.00
